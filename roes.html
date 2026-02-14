@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Valentine 💖</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Prompt:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        background: radial-gradient(circle at top, #ff9a9e, #fad0c4, #fbc2eb);
+        overflow: hidden;
+        font-family: "Prompt", sans-serif;
+      }
+      /* พื้นหลัง */
+      .star {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 2s infinite alternate;
+      }
+      @keyframes twinkle {
+        from {
+          opacity: 0.3;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      /* ซองจดหมาย */
+      .envelope-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+      }
+      .envelope {
+        width: 300px;
+        height: 200px;
+        background: #ff4d6d;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+      /* ฝาซอง */
+      .flap {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ff758f;
+        clip-path: polygon(0 0, 50% 60%, 100% 0);
+        transform-origin: top;
+        transition: 1s;
+      }
+      .envelope.open .flap {
+        transform: rotateX(180deg);
+      }
+      /* ดอกกุหลาบ */
+      .rose {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -200px;
+        font-size: 90px;
+        transition: 2s;
+      }
+      .rose.show {
+        bottom: 300px;
+      }
+      /* กระดาษ */
+      .letter {
+        position: absolute;
+        width: 450px;
+        height: 520px;
+        background: #fffdf7;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: 1.5s;
+        overflow: auto;
+      }
+      .letter.show {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .letter h1 {
+        font-family: "Great Vibes", cursive;
+        font-size: 50px;
+        color: #ff4d6d;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .letter p {
+        font-size: 18px;
+        line-height: 1.8;
+        white-space: pre-line;
+      }
+      /* หัวใจ */
+      .heart {
+        position: absolute;
+        color: #ff4d6d;
+        animation: floatUp 6s linear forwards;
+      }
+      @keyframes floatUp {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+      /* กลีบ */
+      .petal {
+        position: absolute;
+        animation: fall linear forwards;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="envelope-wrapper" onclick="openEnvelope()">
+      <div class="envelope" id="envelope">
+        <div class="flap"></div>
+      </div>
+    </div>
+    <div class="rose" id="rose">🌹</div>
+    <div class="letter" id="letter">
+      <h1>Happy Valentine’s Day</h1>
+      <p id="message"></p>
+    </div>
+    <script>
+      /* ดาวพื้นหลัง */
+      for (let i = 0; i < 100; i++) {
+        let star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.animationDuration = Math.random() * 2 + 1 + "s";
+        document.body.appendChild(star);
+      }
+      function openEnvelope() {
+        document.getElementById("envelope").classList.add("open");
+
+        setTimeout(() => {
+          document.getElementById("rose").classList.add("show");
+        }, 800);
+
+        setTimeout(() => {
+          document.getElementById("letter").classList.add("show");
+          typeWriter();
+          createHearts();
+          createPetals();
+        }, 1600);
+      }
+      /* พิมพ์ข้อความ */
+      const text = `ถึงคนน่ารัก 💕
+
+แฮปปี้วันวาเลนไทน์น้าา งื้ออ 🌹
+วันแห่งความรักทั้งทีอ่ะเนาะ พี่ก็มีของที่อยากจะให้นั่นคือจดหมายฉบับนี้แหละ อิอิ
+ก็ไม่รู้จะเขียนอะไรลงไปดีแต่ ที่เขียนลงไปอาจจะอ่านแล้วงงๆหน่อยนะ แต่มันก็มาจากใจพี่จริงๆเลยนะ
+พี่ไม่รู้ว่าพี่เคยบอกไปหรือยังนะ ว่าพี่ชอบน้องกาแตมากๆเลยนะ น้องกาแตเป็นคนที่น่ารักมากๆเลย พี่ชอบเวลาที่ได้คุยกับน้องกาแตนะและพี่ก็ชอบทุกอย่างที่เป็นกับน้องกาแตเลยนะ
+ยังไงก็ขอให้วันวาเลนไทน์ปีนี้เป็นวันที่ดีสำหรับน้องกาแตนะ และก็อยู่ให้พี่จีบให้ติดก่อนน้าาา อย่าพึ่งหนีไปไหนนะ
+อิอิ 🤍`;
+
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          document.getElementById("message").innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 40);
+        }
+      }
+      /* หัวใจลอย */
+      function createHearts() {
+        setInterval(() => {
+          let heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.innerHTML = "❤";
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.bottom = "0px";
+          heart.style.fontSize = Math.random() * 20 + 20 + "px";
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 6000);
+        }, 300);
+      }
+      /* กลีบกุหลาบ */
+      function createPetals() {
+        setInterval(() => {
+          let petal = document.createElement("div");
+          petal.classList.add("petal");
+          petal.innerHTML = "🌹";
+          petal.style.left = Math.random() * 100 + "vw";
+          petal.style.top = "-20px";
+          petal.style.fontSize = Math.random() * 15 + 15 + "px";
+          petal.style.animationDuration = Math.random() * 5 + 3 + "s";
+          document.body.appendChild(petal);
+          setTimeout(() => petal.remove(), 8000);
+        }, 400);
+      }
+    </script>
+  </body>
+</html>
